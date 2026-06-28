@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Star, Phone, Mail, Instagram, MapPin, Calendar, Camera, Users, Music, Send, ChevronDown } from 'lucide-react';
 import Navbar from '../../components/public/Navbar';
-import api, { BASE_URL } from '../../utils/api';
-import { toast } from 'react-toastify';
 
+import { toast } from 'react-toastify';
+import api from '../../utils/api';
+const BASE_URL = process.env.REACT_APP_API_URL?.replace('/api', '') || 'https://apevents.onrender.com';
 // ✅ Smart image URL — works with Cloudinary URLs and local paths
 function getImg(image) {
   if (!image) return null;
