@@ -5,7 +5,6 @@ exports.getSettings = async (req, res) => {
     let s = await Settings.findOne();
     if (!s) s = await Settings.create({});
 
-    // ✅ Backfill missing stats fields on the existing document
     const needsSave =
       s.statsEventsHosted      == null ||
       s.statsHappyGuests       == null ||
@@ -30,7 +29,6 @@ exports.updateSettings = async (req, res) => {
   try {
     const body = req.body;
 
-    // Build a clean update object with proper types
     const update = {
       companyName:            body.companyName,
       tagline:                body.tagline,
@@ -43,34 +41,27 @@ exports.updateSettings = async (req, res) => {
       primaryColor:           body.primaryColor,
       secondaryColor:         body.secondaryColor,
       accentColor:            body.accentColor,
-
-      // ✅ Boolean — FormData sends "true"/"false" strings
-      darkMode: body.darkMode === 'true',
-
-      // ✅ Array — FormData may send one string or an array
+      darkMode:               body.darkMode === 'true',
       coreValues: Array.isArray(body.coreValues)
         ? body.coreValues
         : body.coreValues
           ? body.coreValues.split(',').map(v => v.trim()).filter(Boolean)
           : [],
-
-      // ✅ Stats fields
       statsEventsHosted:      body.statsEventsHosted,
       statsHappyGuests:       body.statsHappyGuests,
       statsYearsOfExcellence: body.statsYearsOfExcellence,
       statsClientSupport:     body.statsClientSupport,
     };
 
-    // Remove undefined keys so we don't overwrite with undefined
     Object.keys(update).forEach(k => {
       if (update[k] === undefined) delete update[k];
     });
 
-    // Handle uploaded files
+    // ✅ changed both lines below
     if (req.files?.['logo'])
-      update.logo = `/uploads/${req.files['logo'][0].filename}`;
+      update.logo = req.files['logo'][0].path;
     if (req.files?.['backgroundImage'])
-      update.backgroundImage = `/uploads/${req.files['backgroundImage'][0].filename}`;
+      update.backgroundImage = req.files['backgroundImage'][0].path;
 
     let s = await Settings.findOne();
     if (!s) {

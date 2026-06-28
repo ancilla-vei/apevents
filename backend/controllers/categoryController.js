@@ -1,4 +1,3 @@
-// Categories Controller
 const Category = require('../models/Category');
 
 exports.getCategories = async (req, res) => {
@@ -15,7 +14,7 @@ exports.getAllCategories = async (req, res) => {
 
 exports.createCategory = async (req, res) => {
   try {
-    const photo = req.file ? `/uploads/${req.file.filename}` : null;
+    const photo = req.file ? req.file.path : null;  // ✅ changed
     const c = await Category.create({ ...req.body, photo });
     res.status(201).json(c);
   } catch (err) { res.status(500).json({ message: err.message }); }
@@ -24,7 +23,7 @@ exports.createCategory = async (req, res) => {
 exports.updateCategory = async (req, res) => {
   try {
     const update = { ...req.body };
-    if (req.file) update.photo = `/uploads/${req.file.filename}`;
+    if (req.file) update.photo = req.file.path;     // ✅ changed
     res.json(await Category.findByIdAndUpdate(req.params.id, update, { new: true }));
   } catch (err) { res.status(500).json({ message: err.message }); }
 };
@@ -35,5 +34,3 @@ exports.deleteCategory = async (req, res) => {
     res.json({ message: 'Category deleted' });
   } catch (err) { res.status(500).json({ message: err.message }); }
 };
-
-module.exports.categoryController = { getCategories: exports.getCategories, getAllCategories: exports.getAllCategories, createCategory: exports.createCategory, updateCategory: exports.updateCategory, deleteCategory: exports.deleteCategory };

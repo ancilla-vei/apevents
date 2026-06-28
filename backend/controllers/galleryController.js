@@ -10,7 +10,7 @@ exports.addImage = async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ message: 'Image required' });
     const g = await Gallery.create({
-      image: `/uploads/${req.file.filename}`,
+      image: req.file.path,                        // ✅ changed
       description: req.body.description,
       eventName: req.body.eventName,
       featured: req.body.featured === 'true'
@@ -22,7 +22,7 @@ exports.addImage = async (req, res) => {
 exports.updateImage = async (req, res) => {
   try {
     const update = { ...req.body };
-    if (req.file) update.image = `/uploads/${req.file.filename}`;
+    if (req.file) update.image = req.file.path;    // ✅ changed
     res.json(await Gallery.findByIdAndUpdate(req.params.id, update, { new: true }));
   } catch (err) { res.status(500).json({ message: err.message }); }
 };
