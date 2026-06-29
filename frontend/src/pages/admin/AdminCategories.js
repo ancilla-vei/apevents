@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Plus, X, Trash2, Edit } from 'lucide-react';
 import { toast } from 'react-toastify';
 import api from '../../utils/api';
+import getImg from '../../utils/imageHelper';
 
 export default function AdminCategories() {
   const [categories, setCategories] = useState([]);
@@ -61,7 +62,7 @@ export default function AdminCategories() {
             <div key={c._id} className="card" style={{ padding: 0, overflow: 'hidden', opacity: c.active ? 1 : 0.6 }}>
               <div style={{ height: 160, background: 'var(--bg-secondary)', position: 'relative', overflow: 'hidden' }}>
                 {c.photo
-                  ? <img src={`http://localhost:5000${c.photo}`} alt={c.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  ? <img src={getImg(c.photo)} alt={c.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   : <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, var(--primary), var(--secondary))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <span style={{ color: '#fff', fontFamily: 'Playfair Display', fontSize: '1.1rem' }}>{c.title}</span>
                     </div>
@@ -92,7 +93,7 @@ export default function AdminCategories() {
               <div className="form-group"><label>Description</label><textarea className="form-control" rows={2} value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} /></div>
               <div className="form-group">
                 <label>Photo</label>
-                {editing?.photo && <img src={`http://localhost:5000${editing.photo}`} alt="" style={{ height: 80, borderRadius: 6, marginBottom: '0.5rem' }} />}
+                {editing?.photo && <img src={getImg(editing.photo)} alt="" style={{ height: 80, borderRadius: 6, marginBottom: '0.5rem' }} />}
                 <input type="file" className="form-control" accept="image/*" onChange={e => setPhotoFile(e.target.files[0])} />
               </div>
               <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>

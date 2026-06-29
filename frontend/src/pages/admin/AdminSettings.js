@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Save } from 'lucide-react';
 import { toast } from 'react-toastify';
 import api from '../../utils/api';
+import getImg from '../../utils/imageHelper';
 
 // ✅ Outside component to prevent re-mount on every render
 const Section = ({ title, children }) => (
@@ -166,14 +167,14 @@ export default function AdminSettings() {
             <div className="form-group">
               <label>Logo</label>
               {settings.logo && (
-                <img src={`http://localhost:5000${settings.logo}`} alt="logo" style={{ height: 60, borderRadius: 6, marginBottom: '0.5rem', display: 'block' }} />
+                <img src={getImg(settings.logo)} alt="logo" style={{ height: 60, borderRadius: 6, marginBottom: '0.5rem', display: 'block' }} />
               )}
               <input type="file" className="form-control" accept="image/*" onChange={e => setLogoFile(e.target.files[0])} />
             </div>
             <div className="form-group">
               <label>Background Image (Hero)</label>
               {settings.backgroundImage && (
-                <img src={`http://localhost:5000${settings.backgroundImage}`} alt="bg" style={{ height: 60, borderRadius: 6, marginBottom: '0.5rem', objectFit: 'cover', width: '100%', display: 'block' }} />
+                <img src={getImg(settings.backgroundImage)} alt="bg" style={{ height: 60, borderRadius: 6, marginBottom: '0.5rem', objectFit: 'cover', width: '100%', display: 'block' }} />
               )}
               <input type="file" className="form-control" accept="image/*" onChange={e => setBgFile(e.target.files[0])} />
             </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Plus, X, Trash2, Edit } from 'lucide-react';
 import { toast } from 'react-toastify';
 import api from '../../utils/api';
+import getImg from '../../utils/imageHelper';
 
 const empty = { name: '', description: '', icon: '', order: 0, active: true };
 
@@ -61,7 +62,7 @@ export default function AdminServices() {
           {services.length === 0 && <p className="text-muted" style={{ gridColumn: '1/-1', textAlign: 'center', padding: '2rem' }}>No services yet. Add your first!</p>}
           {services.map(s => (
             <div key={s._id} className="card" style={{ position: 'relative', opacity: s.active ? 1 : 0.6 }}>
-              {s.image && <img src={`http://localhost:5000${s.image}`} alt={s.name} style={{ width: '100%', height: 140, objectFit: 'cover', borderRadius: 8, marginBottom: '0.75rem' }} />}
+              {s.image && <img src={getImg(s.image)} alt={s.name} style={{ width: '100%', height: 140, objectFit: 'cover', borderRadius: 8, marginBottom: '0.75rem' }} />}
               <h3 style={{ color: 'var(--primary)', marginBottom: '0.4rem' }}>{s.name}</h3>
               {s.description && <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', marginBottom: '0.75rem' }}>{s.description}</p>}
               {!s.active && <span className="badge badge-cancelled" style={{ marginBottom: '0.75rem', display: 'inline-block' }}>Inactive</span>}
@@ -90,7 +91,7 @@ export default function AdminServices() {
               </div>
               <div className="form-group">
                 <label>Image</label>
-                {editing?.image && <img src={`http://localhost:5000${editing.image}`} alt="" style={{ height: 80, borderRadius: 6, marginBottom: '0.5rem' }} />}
+                {editing?.image && <img src={getImg(editing.image)} alt="" style={{ height: 80, borderRadius: 6, marginBottom: '0.5rem' }} />}
                 <input type="file" className="form-control" accept="image/*" onChange={e => setImageFile(e.target.files[0])} />
               </div>
               <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>

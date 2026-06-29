@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Plus, X, Trash2 } from 'lucide-react';
 import { toast } from 'react-toastify';
 import api from '../../utils/api';
+import getImg from '../../utils/imageHelper';
 
 export default function AdminGallery() {
   const [gallery, setGallery] = useState([]);
@@ -63,7 +64,7 @@ export default function AdminGallery() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '1rem' }}>
             {gallery.map(g => (
               <div key={g._id} style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', background: 'var(--bg-secondary)' }}>
-                <img src={`http://localhost:5000${g.image}`} alt={g.eventName || 'gallery'} style={{ width: '100%', height: 180, objectFit: 'cover', display: 'block' }} />
+                <img src={getImg(g.image)} alt={g.eventName || 'gallery'} style={{ width: '100%', height: 180, objectFit: 'cover', display: 'block' }} />
                 <div style={{ padding: '0.6rem 0.75rem' }}>
                   {g.eventName && <p style={{ fontWeight: 600, fontSize: '0.88rem', color: 'var(--primary)' }}>{g.eventName}</p>}
                   {g.description && <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{g.description}</p>}
