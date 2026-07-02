@@ -14,12 +14,31 @@ dns.setServers(['1.1.1.1', '8.8.8.8']);
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production'
-    ? process.env.FRONTEND_URL
-    : 'https://apeventmanglore.netlify.app',
-  credentials: true
-}));
+const corsOptions = {
+  credentials: true,
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = process.env.NODE_ENV === 'production'
+      ? [
+          process.env.FRONTEND_URL,
+          'https://apeventmangalore.netlify.app',
+          'https://apeventmanaglore.netlify.app',
+          'https://ap-events-frontend.netlify.app',
+          'https://apevents-1.onrender.com'
+        ].filter(Boolean) // Remove undefined values
+      : ['https://apeventmanglore.netlify.app', 'http://localhost:3000'];
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log('CORS blocked origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
