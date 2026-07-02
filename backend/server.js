@@ -17,7 +17,7 @@ const app = express();
 const corsOptions = {
   credentials: true,
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps, curl, etc.)
+    // Allow requests with no origin (l mobile apps, curl, etc.)
     if (!origin) return callback(null, true);
     
     const allowedOrigins = process.env.NODE_ENV === 'production'
