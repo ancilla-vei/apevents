@@ -55,35 +55,35 @@ export default function CustomerBookings() {
 
       {loading ? <div className="spinner-wrap"><div className="spinner" /></div> : (
         bookings.length === 0 ? (
-          <div className="card text-center" style={{ padding: '3rem' }}>
+          <div className="card text-center" style={{ padding: 'clamp(2rem, 5vw, 3rem)' }}>
             <Calendar size={48} style={{ margin: '0 auto 1rem', color: 'var(--text-muted)' }} />
-            <h3 style={{ color: 'var(--text-muted)' }}>No bookings yet</h3>
-            <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Book your first event to get started!</p>
+            <h3 style={{ color: 'var(--text-muted)', fontSize: 'clamp(1.1rem, 3vw, 1.3rem)' }}>No bookings yet</h3>
+            <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem', fontSize: 'clamp(0.9rem, 2.5vw, 0.95rem)' }}>Book your first event to get started!</p>
             <button className="btn btn-primary mt-2" onClick={() => setShowForm(true)}>Book Now</button>
           </div>
         ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.75rem, 2vw, 1rem)' }}>
             {bookings.map(b => (
-              <div key={b._id} className="card">
-                <div className="flex-between" style={{ marginBottom: '0.75rem' }}>
-                  <div>
-                    <h3 style={{ color: 'var(--primary)', fontSize: '1.1rem' }}>{b.eventType}</h3>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{new Date(b.createdAt).toLocaleDateString()}</p>
+              <div key={b._id} className="card" style={{ padding: 'clamp(1rem, 3vw, 1.5rem)' }}>
+                <div className="flex-between" style={{ marginBottom: 'clamp(0.5rem, 1.5vw, 0.75rem)', flexWrap: 'wrap', gap: '0.5rem' }}>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <h3 style={{ color: 'var(--primary)', fontSize: 'clamp(1rem, 2.5vw, 1.1rem)' }}>{b.eventType}</h3>
+                    <p style={{ color: 'var(--text-muted)', fontSize: 'clamp(0.8rem, 2vw, 0.85rem)' }}>{new Date(b.createdAt).toLocaleDateString()}</p>
                   </div>
-                  <span className={`badge ${STATUS_COLORS[b.status]}`}>{b.status}</span>
+                  <span className={`badge ${STATUS_COLORS[b.status]}`} style={{ fontSize: 'clamp(0.7rem, 1.8vw, 0.78rem)' }}>{b.status}</span>
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '0.75rem', fontSize: '0.9rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 'clamp(0.5rem, 1.5vw, 0.75rem)', fontSize: 'clamp(0.85rem, 2.2vw, 0.9rem)' }}>
                   <div><span style={{ color: 'var(--text-muted)' }}>Date: </span><strong>{new Date(b.eventDate).toLocaleDateString()}</strong></div>
                   <div><span style={{ color: 'var(--text-muted)' }}>Time: </span><strong>{b.startTime}</strong></div>
                   <div><span style={{ color: 'var(--text-muted)' }}>Guests: </span><strong>{b.guestCount}</strong></div>
                   <div><span style={{ color: 'var(--text-muted)' }}>Budget: </span><strong>₹{Number(b.budget).toLocaleString()}</strong></div>
-                  <div><span style={{ color: 'var(--text-muted)' }}>Venue: </span><strong>{b.venue}</strong></div>
+                  <div style={{ gridColumn: '1 / -1' }}><span style={{ color: 'var(--text-muted)' }}>Venue: </span><strong>{b.venue}</strong></div>
                 </div>
-                {b.decorDemands && <p style={{ marginTop: '0.75rem', color: 'var(--text-secondary)', fontSize: '0.88rem' }}><strong>Décor:</strong> {b.decorDemands}</p>}
+                {b.decorDemands && <p style={{ marginTop: 'clamp(0.5rem, 1.5vw, 0.75rem)', color: 'var(--text-secondary)', fontSize: 'clamp(0.85rem, 2.2vw, 0.88rem)' }}><strong>Décor:</strong> {b.decorDemands}</p>}
                 {b.adminNotes && (
-                  <div style={{ marginTop: '0.75rem', padding: '0.75rem', background: 'var(--bg-secondary)', borderRadius: 6, borderLeft: '3px solid var(--primary)' }}>
-                    <strong style={{ fontSize: '0.85rem', color: 'var(--primary)' }}>Admin Note: </strong>
-                    <span style={{ fontSize: '0.88rem', color: 'var(--text-secondary)' }}>{b.adminNotes}</span>
+                  <div style={{ marginTop: 'clamp(0.5rem, 1.5vw, 0.75rem)', padding: 'clamp(0.6rem, 1.5vw, 0.75rem)', background: 'var(--bg-secondary)', borderRadius: 6, borderLeft: '3px solid var(--primary)' }}>
+                    <strong style={{ fontSize: 'clamp(0.8rem, 2vw, 0.85rem)', color: 'var(--primary)' }}>Admin Note: </strong>
+                    <span style={{ fontSize: 'clamp(0.85rem, 2.2vw, 0.88rem)', color: 'var(--text-secondary)' }}>{b.adminNotes}</span>
                   </div>
                 )}
               </div>
@@ -95,13 +95,13 @@ export default function CustomerBookings() {
       {/* Booking Modal */}
       {showForm && (
         <div className="modal-overlay">
-          <div className="modal" style={{ maxWidth: 640 }}>
+          <div className="modal" style={{ maxWidth: 640, padding: 'clamp(1.25rem, 4vw, 2rem)' }}>
             <div className="modal-header">
-              <span className="modal-title">Book an Event</span>
-              <button className="modal-close" onClick={() => setShowForm(false)}><X size={20} /></button>
+              <span className="modal-title" style={{ fontSize: 'clamp(1.1rem, 3vw, 1.3rem)' }}>Book an Event</span>
+              <button className="modal-close" onClick={() => setShowForm(false)} style={{ padding: '0.5rem', minWidth: '44px', minHeight: '44px' }}><X size={20} /></button>
             </div>
             <form onSubmit={handleSubmit}>
-              <div className="grid-2">
+              <div className="grid-2" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
                 <div className="form-group">
                   <label>Event Type *</label>
                   <select className="form-control" value={form.eventType} onChange={e => setForm({ ...form, eventType: e.target.value })}>
@@ -139,7 +139,7 @@ export default function CustomerBookings() {
                 <label>Décor Demands (optional)</label>
                 <textarea className="form-control" placeholder="Any specific décor or theme requirements..." value={form.decorDemands} onChange={e => setForm({ ...form, decorDemands: e.target.value })} rows={3} />
               </div>
-              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end' }}>
+              <div style={{ display: 'flex', gap: 'clamp(0.5rem, 1.5vw, 1rem)', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
                 <button type="button" className="btn btn-outline" onClick={() => setShowForm(false)}>Cancel</button>
                 <button type="submit" className="btn btn-primary" disabled={submitting}>{submitting ? 'Submitting...' : 'Submit Booking'}</button>
               </div>

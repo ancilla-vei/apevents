@@ -70,7 +70,7 @@ export default function CustomerDashboard() {
       {sidebarOpen && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 200 }}>
           <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)' }} onClick={() => setSidebarOpen(false)} />
-          <aside style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 260, background: 'var(--primary)', zIndex: 1 }}>
+          <aside style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 'min(260px, 85vw)', background: 'var(--primary)', zIndex: 1, overflowY: 'auto' }}>
             {sidebarContent}
           </aside>
         </div>
@@ -79,14 +79,14 @@ export default function CustomerDashboard() {
       {/* Main */}
       <main style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
         {/* Mobile header */}
-        <header style={{ background: 'var(--primary)', padding: '1rem 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} className="mobile-header">
-          <button onClick={() => setSidebarOpen(true)} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer' }}>
+        <header style={{ background: 'var(--primary)', padding: 'clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 1.5rem)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} className="mobile-header">
+          <button onClick={() => setSidebarOpen(true)} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', padding: '0.5rem', minWidth: '44px', minHeight: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Menu size={24} />
           </button>
-          <span style={{ color: '#fff', fontFamily: 'Playfair Display', fontWeight: 700 }}>AP Events</span>
-          <div />
+          <span style={{ color: '#fff', fontFamily: 'Playfair Display', fontWeight: 700, fontSize: 'clamp(1rem, 3vw, 1.2rem)' }}>AP Events</span>
+          <div style={{ minWidth: '44px' }} />
         </header>
-        <div style={{ flex: 1, padding: '2rem', overflow: 'auto' }}>
+        <div style={{ flex: 1, padding: 'clamp(1rem, 3vw, 2rem)', overflow: 'auto' }}>
           <Outlet />
         </div>
       </main>

@@ -232,7 +232,7 @@ export default function HomePage() {
         ))}
 
         {/* Hero content */}
-        <div className="hero-content" style={{ position:'relative',zIndex:10,textAlign:'center',padding:'6rem 1.5rem 2rem',maxWidth:780,margin:'0 auto',width:'100%' }}>
+        <div className="hero-content" style={{ position:'relative',zIndex:10,textAlign:'center',padding:'5rem 1.25rem 2rem',maxWidth:780,margin:'0 auto',width:'100%' }}>
           <div style={{ display:'flex',alignItems:'center',justifyContent:'center',gap:'0.75rem',marginBottom:'1.25rem' }}>
             <div style={{ height:1,width:55,background:'linear-gradient(to right, transparent, rgba(255,215,0,0.7))' }} />
             <span style={{ color:'var(--accent)',fontSize:'1rem' }}>✦</span>
@@ -241,7 +241,7 @@ export default function HomePage() {
           <p style={{ color:'rgba(255,215,0,0.9)',fontWeight:700,letterSpacing:'0.35em',textTransform:'uppercase',fontSize:'0.8rem',marginBottom:'0.6rem',textShadow:'0 1px 8px rgba(0,0,0,0.6)' }}>
             Welcome to
           </p>
-          <h1 style={{ color:'white',textTransform:'uppercase',fontSize:'clamp(3.2rem, 10vw, 6.5rem)',fontFamily:'Playfair Display',fontWeight:700,lineHeight:1.05,marginBottom:'0.9rem',textShadow:'0 2px 20px rgba(0,0,0,0.6)',letterSpacing:'0.02em' }}>
+          <h1 style={{ color:'white',textTransform:'uppercase',fontSize:'clamp(2.5rem, 8vw, 6.5rem)',fontFamily:'Playfair Display',fontWeight:700,lineHeight:1.05,marginBottom:'0.9rem',textShadow:'0 2px 20px rgba(0,0,0,0.6)',letterSpacing:'0.02em' }}>
             {settings?.companyName || 'AP EVENTS'}
           </h1>
           <div style={{ display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem',marginBottom:'1.1rem' }}>
@@ -262,9 +262,9 @@ export default function HomePage() {
               </React.Fragment>
             ))}
           </div>
-          <div style={{ display:'flex',gap:'1rem',justifyContent:'center',flexWrap:'wrap' }}>
-            <Link to="/login" className="btn-book">Book Your Event</Link>
-            <a href="#about" className="btn-learn">Learn More</a>
+          <div style={{ display:'flex',gap:'0.75rem',justifyContent:'center',flexWrap:'wrap',flexDirection:'row' }}>
+            <Link to="/login" className="btn-book" style={{ fontSize:'clamp(0.95rem, 2.5vw, 1.05rem)', padding:'clamp(0.85rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.8rem)' }}>Book Your Event</Link>
+            <a href="#about" className="btn-learn" style={{ fontSize:'clamp(0.9rem, 2.2vw, 1rem)', padding:'clamp(0.8rem, 1.8vw, 0.95rem) clamp(1.2rem, 3vw, 2.2rem)' }}>Learn More</a>
           </div>
         </div>
 
@@ -277,10 +277,10 @@ export default function HomePage() {
       {/* ══ ABOUT ══ */}
       <section id="about" className="section" style={{ background:'var(--bg-secondary)' }}>
         <div className="container">
-          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))',gap:'3rem',alignItems:'center' }}>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))',gap:'2rem',alignItems:'center' }}>
             <div>
               <p style={{ color:'var(--accent)',fontWeight:600,textTransform:'uppercase',letterSpacing:'0.12em',marginBottom:'0.75rem',fontSize:'0.82rem' }}>About Us</p>
-              <h2 style={{ fontSize:'2.2rem',color:'var(--primary)',marginBottom:'1.25rem' }}>Mangaluru's Beloved Event Company</h2>
+              <h2 style={{ fontSize:'clamp(1.6rem, 4vw, 2.2rem)',color:'var(--primary)',marginBottom:'1rem' }}>Mangaluru's Beloved Event Company</h2>
               <p style={{ color:'var(--text-secondary)',lineHeight:1.85,marginBottom:'1rem' }}>
                 {settings?.missionStatement || "AP Events is a Mangaluru-based event management company dedicated to crafting unforgettable celebrations. In just one year, we've built a reputation for creativity, attention to detail, and heartfelt service."}
               </p>
@@ -295,15 +295,15 @@ export default function HomePage() {
                 </div>
               )}
             </div>
-            <div style={{ display:'grid',gridTemplateColumns:'1fr 1fr',gap:'1rem' }}>
+            <div style={{ display:'grid',gridTemplateColumns:'repeat(2, 1fr)',gap:'0.75rem' }}>
               {[
                 { n: settings?.statsEventsHosted      || '100+', l:'Events Hosted'      },
                 { n: settings?.statsHappyGuests       || '500+', l:'Happy Guests'       },
                 { n: settings?.statsYearsOfExcellence || '1',    l:'Year of Excellence' },
                 { n: settings?.statsClientSupport     || '24/7', l:'Client Support'     },
               ].map(s => (
-                <div key={s.l} className="card" style={{ textAlign:'center',padding:'1.5rem 1rem' }}>
-                  <div style={{ fontSize:'2rem',fontWeight:700,color:'var(--primary)',fontFamily:'Playfair Display' }}>{s.n}</div>
+                <div key={s.l} className="card" style={{ textAlign:'center',padding:'clamp(1rem, 3vw, 1.5rem) clamp(0.75rem, 2vw, 1rem)' }}>
+                  <div style={{ fontSize:'clamp(1.5rem, 4vw, 2rem)',fontWeight:700,color:'var(--primary)',fontFamily:'Playfair Display' }}>{s.n}</div>
                   <div style={{ color:'var(--text-secondary)',fontSize:'0.82rem',marginTop:'0.25rem' }}>{s.l}</div>
                 </div>
               ))}
@@ -343,12 +343,12 @@ export default function HomePage() {
           <div className="section-header">
             <h2>Event Categories</h2>
             <div className="section-divider" />
-            <p>From elegant weddings to lively corporate events — we handle every occasion with excellence.</p>
+            <p style={{ fontSize:'clamp(0.9rem, 2.5vw, 1.05rem)' }}>From elegant weddings to lively corporate events — we handle every occasion with excellence.</p>
           </div>
           {categories.length > 0 ? (
-            <div className="grid-4">
+            <div className="grid-4" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))' }}>
               {categories.map(c => (
-                <div key={c._id} style={{ position:'relative',borderRadius:12,overflow:'hidden',height:220,cursor:'pointer' }}
+                <div key={c._id} style={{ position:'relative',borderRadius:12,overflow:'hidden',height:'clamp(180px, 40vw, 220px)',cursor:'pointer' }}
                   onMouseOver={e => e.currentTarget.querySelector('.cat-overlay').style.opacity='1'}
                   onMouseOut={e => e.currentTarget.querySelector('.cat-overlay').style.opacity='0'}
                 >
@@ -375,12 +375,12 @@ export default function HomePage() {
           <div className="section-header">
             <h2>Our Gallery</h2>
             <div className="section-divider" />
-            <p>Glimpses of the beautiful celebrations we've crafted for our clients.</p>
+            <p style={{ fontSize:'clamp(0.9rem, 2.5vw, 1.05rem)' }}>Glimpses of the beautiful celebrations we've crafted for our clients.</p>
           </div>
           {gallery.length > 0 ? (
-            <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill, minmax(250px, 1fr))',gap:'1rem' }}>
+            <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill, minmax(150px, 1fr))',gap:'0.75rem' }}>
               {gallery.map(g => (
-                <div key={g._id} style={{ position:'relative',borderRadius:10,overflow:'hidden',height:200,background:'var(--bg-secondary)' }}>
+                <div key={g._id} style={{ position:'relative',borderRadius:10,overflow:'hidden',height:'clamp(150px, 35vw, 200px)',background:'var(--bg-secondary)' }}>
                   {/* ✅ getImg handles Cloudinary full URLs */}
                   <img
                     src={getImg(g.image)}
@@ -431,11 +431,11 @@ export default function HomePage() {
           <div className="section-header">
             <h2>Get In Touch</h2>
             <div className="section-divider" />
-            <p>Have a question? We'd love to hear from you.</p>
+            <p style={{ fontSize:'clamp(0.9rem, 2.5vw, 1.05rem)' }}>Have a question? We'd love to hear from you.</p>
           </div>
-          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))',gap:'3rem' }}>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))',gap:'2rem' }}>
             <div>
-              <h3 style={{ color:'var(--primary)',marginBottom:'1.5rem' }}>Contact Details</h3>
+              <h3 style={{ color:'var(--primary)',marginBottom:'clamp(1rem, 3vw, 1.5rem)',fontSize:'clamp(1.1rem, 3vw, 1.3rem)' }}>Contact Details</h3>
               <div style={{ display:'flex',gap:'1rem',marginBottom:'1.25rem',alignItems:'flex-start' }}>
                 <span style={{ color:'var(--primary)',marginTop:2 }}><Phone size={20}/></span>
                 <span style={{ color:'var(--text-secondary)' }}>{settings?.phone || '7411185509'}</span>
@@ -458,7 +458,7 @@ export default function HomePage() {
               </div>
             </div>
             <form onSubmit={submitEnquiry}>
-              <h3 style={{ color:'var(--primary)',marginBottom:'1.5rem' }}>Send an Enquiry</h3>
+              <h3 style={{ color:'var(--primary)',marginBottom:'clamp(1rem, 3vw, 1.5rem)',fontSize:'clamp(1.1rem, 3vw, 1.3rem)' }}>Send an Enquiry</h3>
               <div className="form-group">
                 <label>Your Name</label>
                 <input className="form-control" placeholder="Enter your name" value={enquiry.name} onChange={e => setEnquiry({...enquiry,name:e.target.value})} />

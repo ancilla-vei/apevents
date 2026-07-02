@@ -169,12 +169,68 @@ textarea.form-control { resize: vertical; min-height: 90px; }
 @media (max-width: 900px) {
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .section { padding: 4rem 0; }
+  .section-header h2 { font-size: 2rem; }
 }
 @media (max-width: 600px) {
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .section { padding: 3rem 0; }
-  .section-header h2 { font-size: 1.8rem; }
+  .section-header { margin-bottom: 2rem; }
+  .section-header h2 { font-size: 1.75rem; }
+  .section-header p { font-size: 0.95rem; }
   .container { padding: 0 1rem; }
+  
+  /* Ensure touch targets are at least 44px */
+  .btn { 
+    min-height: 44px; 
+    padding: 0.75rem 1.5rem; 
+    font-size: 0.95rem;
+  }
+  
+  /* Better form inputs for mobile */
+  .form-control {
+    font-size: 16px; /* Prevents iOS zoom */
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+  }
+  
+  /* Card improvements */
+  .card {
+    padding: 1.25rem;
+    border-radius: 8px;
+  }
+  
+  /* Modal improvements */
+  .modal {
+    padding: 1.5rem;
+    margin: 1rem;
+    max-height: 95vh;
+  }
+  
+  /* Table scroll */
+  .table-wrap {
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 380px) {
+  .section-header h2 { font-size: 1.5rem; }
+  .btn { 
+    padding: 0.65rem 1.25rem; 
+    font-size: 0.9rem;
+  }
+  .container { padding: 0 0.75rem; }
+}
+
+/* Landscape mobile */
+@media (max-width: 767px) and (orientation: landscape) {
+  .section { padding: 2rem 0; }
+  .modal {
+    max-height: 100vh;
+    overflow-y: auto;
+  }
 }
 
 /* Scrollbar */

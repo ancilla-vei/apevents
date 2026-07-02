@@ -9,31 +9,31 @@ import logo from '../../assets/logo.png';
 function AuthLayout({ children, title, subtitle }) {
   const { theme, toggleTheme } = useTheme();
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
-      <div style={{ width: '100%', maxWidth: 440 }}>
-        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(0.75rem, 2vw, 1rem)' }}>
+      <div style={{ width: '100%', maxWidth: 440, padding: '0 0.5rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: 'clamp(1rem, 3vw, 1.5rem)' }}>
           <Link to="/" style={{ display: 'inline-block' }}>
             <img 
               src={logo} 
               alt="AP Events" 
               style={{ 
-                width: '180px', 
+                width: 'clamp(140px, 35vw, 180px)', 
                 height: 'auto',
                 maxWidth: '100%'
               }} 
             />
           </Link>
-          <h1 style={{ marginTop: '1rem', fontSize: '1.6rem', color: 'var(--text)' }}>{title}</h1>
-          <p style={{ color: 'var(--text-muted)', marginTop: '0.4rem' }}>{subtitle}</p>
+          <h1 style={{ marginTop: 'clamp(0.75rem, 2vw, 1rem)', fontSize: 'clamp(1.3rem, 4vw, 1.6rem)', color: 'var(--text)' }}>{title}</h1>
+          <p style={{ color: 'var(--text-muted)', marginTop: '0.4rem', fontSize: 'clamp(0.85rem, 2.5vw, 0.95rem)' }}>{subtitle}</p>
         </div>
-        <div className="card" style={{ padding: '2rem' }}>
+        <div className="card" style={{ padding: 'clamp(1.25rem, 4vw, 2rem)' }}>
           {children}
         </div>
-        <div style={{ textAlign: 'center', marginTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link to="/" style={{ color: 'var(--text-muted)', display: 'flex', gap: '0.4rem', alignItems: 'center', fontSize: '0.9rem' }}>
+        <div style={{ textAlign: 'center', marginTop: 'clamp(0.75rem, 2vw, 1rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
+          <Link to="/" style={{ color: 'var(--text-muted)', display: 'flex', gap: '0.4rem', alignItems: 'center', fontSize: 'clamp(0.85rem, 2.5vw, 0.9rem)' }}>
             <ArrowLeft size={16} /> Back to Home
           </Link>
-          <button onClick={toggleTheme} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}>
+          <button onClick={toggleTheme} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', padding: '0.5rem' }}>
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
         </div>
@@ -107,16 +107,16 @@ export function LoginPage() {
           <input className="form-control" type="password" placeholder="Enter password" value={form.password}
             onChange={e => setForm({ ...form, password: e.target.value })} />
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', marginTop: '0.5rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'clamp(0.75rem, 2vw, 1rem)', marginTop: 'clamp(0.4rem, 1vw, 0.5rem)', flexWrap: 'wrap', gap: '0.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <input 
               type="checkbox" 
               id="rememberMe"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: 'pointer', minWidth: '18px', minHeight: '18px' }}
             />
-            <label htmlFor="rememberMe" style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--text-muted)', margin: 0 }}>
+            <label htmlFor="rememberMe" style={{ cursor: 'pointer', fontSize: 'clamp(0.85rem, 2.5vw, 0.9rem)', color: 'var(--text-muted)', margin: 0 }}>
               Remember me
             </label>
           </div>
@@ -126,7 +126,7 @@ export function LoginPage() {
               color: 'var(--primary)', 
               fontWeight: 600,
               textDecoration: 'none',
-              fontSize: '0.9rem'
+              fontSize: 'clamp(0.85rem, 2.5vw, 0.9rem)'
             }}
           >
             Forgot Password?
@@ -136,7 +136,7 @@ export function LoginPage() {
           {loading ? 'Logging in...' : 'Login'}
         </button>
       </form>
-      <div style={{ textAlign: 'center', marginTop: '1rem', fontSize: '0.9rem' }}>
+      <div style={{ textAlign: 'center', marginTop: 'clamp(0.75rem, 2vw, 1rem)', fontSize: 'clamp(0.85rem, 2.5vw, 0.9rem)' }}>
         <p style={{ color: 'var(--text-muted)' }}>
           Don't have an account? <Link to="/register" style={{ color: 'var(--primary)', fontWeight: 600 }}>Register here</Link>
         </p>
