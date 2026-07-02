@@ -3,8 +3,8 @@ services:
     name: ap-events-backend
     env: node
     plan: free
-    buildCommand: cd backend && npm install --production=false
-    startCommand: cd backend && node server.js
+    buildCommand: npm run render-build
+    startCommand: npm run render-start
     envVars:
       - key: NODE_ENV
         value: production

@@ -41,6 +41,29 @@ export default function AdminSettings() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validation
+    if (!settings.companyName || !settings.companyName.trim()) {
+      toast.error('Please enter company name');
+      return;
+    }
+    if (!settings.phone || !settings.phone.trim()) {
+      toast.error('Please enter phone number');
+      return;
+    }
+    if (!settings.email || !settings.email.trim()) {
+      toast.error('Please enter email address');
+      return;
+    }
+    if (!settings.email.includes('@')) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+    if (!settings.address || !settings.address.trim()) {
+      toast.error('Please enter address');
+      return;
+    }
+    
     setSaving(true);
     try {
       const fd = new FormData();

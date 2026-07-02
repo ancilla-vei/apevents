@@ -263,7 +263,7 @@ export default function HomePage() {
             ))}
           </div>
           <div style={{ display:'flex',gap:'1rem',justifyContent:'center',flexWrap:'wrap' }}>
-            <Link to="/login" className="btn-book">✨ Book Your Event</Link>
+            <Link to="/login" className="btn-book">Book Your Event</Link>
             <a href="#about" className="btn-learn">Learn More</a>
           </div>
         </div>

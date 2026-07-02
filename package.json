@@ -7,8 +7,10 @@
     "dev-backend": "npm run dev --prefix backend",
     "dev-frontend": "npm start --prefix frontend",
     "dev": "concurrently \"npm run dev-backend\" \"npm run dev-frontend\"",
-    "build": "npm run build --prefix frontend",
-    "start": "npm start --prefix backend"
+    "build": "echo 'Skipping root build - backend deployed separately'",
+    "start": "npm start --prefix backend",
+    "render-build": "cd backend && npm install",
+    "render-start": "cd backend && node server.js"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

@@ -16,38 +16,90 @@ export default function CustomerProfile() {
 
   const saveProfile = async (e) => {
     e.preventDefault();
+    
+    // Validation
+    if (!form.name || !form.name.trim()) {
+      toast.error('Please enter your full name');
+      return;
+    }
+    if (!form.email || !form.email.trim()) {
+      toast.error('Please enter your email');
+      return;
+    }
+    if (!form.email.includes('@')) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+    
     setSaving(true);
     try {
       const { data } = await api.put('/auth/profile', form);
       updateUser(data);
       toast.success('Profile updated!');
-    } catch { toast.error('Failed to update profile'); }
+    } catch (err) { 
+      toast.error(err.response?.data?.message || 'Failed to update profile'); 
+    }
     finally { setSaving(false); }
   };
 
   const changePassword = async (e) => {
     e.preventDefault();
-    if (pwd.newPassword !== pwd.confirm) return toast.error('Passwords do not match');
-    if (pwd.newPassword.length < 6) return toast.error('Password must be at least 6 characters');
+    
+    // Validation
+    if (!pwd.currentPassword) {
+      toast.error('Please enter your current password');
+      return;
+    }
+    if (!pwd.newPassword) {
+      toast.error('Please enter a new password');
+      return;
+    }
+    if (pwd.newPassword.length < 6) {
+      toast.error('New password must be at least 6 characters');
+      return;
+    }
+    if (!pwd.confirm) {
+      toast.error('Please confirm your new password');
+      return;
+    }
+    if (pwd.newPassword !== pwd.confirm) {
+      toast.error('Passwords do not match');
+      return;
+    }
+    
     setChangingPwd(true);
     try {
       await api.put('/auth/change-password', { currentPassword: pwd.currentPassword, newPassword: pwd.newPassword });
       toast.success('Password changed!');
       setPwd({ currentPassword: '', newPassword: '', confirm: '' });
-    } catch (err) { toast.error(err.response?.data?.message || 'Failed to change password'); }
+    } catch (err) { 
+      toast.error(err.response?.data?.message || 'Failed to change password'); 
+    }
     finally { setChangingPwd(false); }
   };
 
   const submitReview = async (e) => {
     e.preventDefault();
-    if (!reviewText.trim()) return toast.error('Please write a review');
+    
+    // Validation
+    if (!reviewText.trim()) {
+      toast.error('Please write a review');
+      return;
+    }
+    if (reviewText.trim().length < 10) {
+      toast.error('Review must be at least 10 characters');
+      return;
+    }
+    
     setSubmittingReview(true);
     try {
       await api.post('/testimonials', { rating, text: reviewText });
       toast.success('Review submitted! Awaiting admin approval.');
       setReviewText('');
       setRating(5);
-    } catch { toast.error('Failed to submit review'); }
+    } catch (err) { 
+      toast.error(err.response?.data?.message || 'Failed to submit review'); 
+    }
     finally { setSubmittingReview(false); }
   };
 

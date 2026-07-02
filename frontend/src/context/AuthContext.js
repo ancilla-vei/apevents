@@ -44,8 +44,23 @@ export function AuthProvider({ children }) {
 
   const updateUser = (updatedUser) => setUser(prev => ({ ...prev, ...updatedUser }));
 
+  const forgotPassword = async (phone) => {
+    const { data } = await api.post('/auth/forgot-password', { phone });
+    return data;
+  };
+
+  const verifyOTP = async (phone, otp) => {
+    const { data } = await api.post('/auth/verify-otp', { phone, otp });
+    return data;
+  };
+
+  const resetPassword = async (phone, otp, newPassword) => {
+    const { data } = await api.post('/auth/reset-password', { phone, otp, newPassword });
+    return data;
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, updateUser }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, updateUser, forgotPassword, verifyOTP, resetPassword }}>
       {children}
     </AuthContext.Provider>
   );

@@ -8,6 +8,8 @@ const userSchema = new mongoose.Schema({
   role: { type: String, enum: ['admin', 'customer'], default: 'customer' },
   avatar: { type: String },
   address: { type: String },
+  resetPasswordOTP: { type: String },
+  resetPasswordExpire: { type: Date },
   createdAt: { type: Date, default: Date.now }
 });
 

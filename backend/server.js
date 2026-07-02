@@ -69,18 +69,45 @@ mongoose.connect(process.env.MONGODB_URI)
 async function seedAdmin() {
   try {
     const User = require('./models/User');
-    const existing = await User.findOne({ phone: process.env.ADMIN_PHONE || '7411185509' });
+    const adminPhone = process.env.ADMIN_PHONE || '7411185509';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'Pachu@123';
+    
+    console.log(`\n🔍 Checking for admin user with phone: ${adminPhone}`);
+    
+    const existing = await User.findOne({ phone: adminPhone });
+    
     if (!existing) {
-      const hashed = await bcrypt.hash(process.env.ADMIN_PASSWORD || 'Pachu@123', 10);
-      await User.create({
+      console.log('📝 Admin user not found, creating new admin user...');
+      const hashed = await bcrypt.hash(adminPassword, 10);
+      const admin = await User.create({
         name: 'Admin',
-        phone: process.env.ADMIN_PHONE || '7411185509',
+        phone: adminPhone,
         password: hashed,
         role: 'admin'
       });
-      console.log('✅ Admin user seeded');
+      console.log('✅ Admin user created successfully');
+      console.log(`   Phone: ${admin.phone}`);
+      console.log(`   Role: ${admin.role}`);
+      console.log(`   Password hash: ${admin.password.substring(0, 20)}...`);
+    } else {
+      console.log('✅ Admin user already exists');
+      console.log(`   Phone: ${existing.phone}`);
+      console.log(`   Name: ${existing.name}`);
+      console.log(`   Role: ${existing.role}`);
+      
+      // Verify password is correct
+      const isMatch = await bcrypt.compare(adminPassword, existing.password);
+      console.log(`   Password match test: ${isMatch ? '✅ PASS' : '❌ FAIL'}`);
+      
+      if (!isMatch) {
+        console.log('⚠️  Password mismatch detected, resetting password...');
+        existing.password = await bcrypt.hash(adminPassword, 10);
+        await existing.save();
+        console.log('✅ Password reset successful');
+      }
     }
   } catch (err) {
     console.error('❌ Error seeding admin user:', err.message);
+    console.error('   Stack:', err.stack);
   }
 }
