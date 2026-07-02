@@ -27,4 +27,4 @@ services:
       - key: CLOUDINARY_API_SECRET
         value: 1ShDGzIG3c7BW3PPc04iKLN7nDM
       - key: FRONTEND_URL
-        sync: false
+        value: https://apeventmangalore.netlify.app
